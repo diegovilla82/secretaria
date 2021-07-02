@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::redirect('/','/comisiones');
+
+Route::view('lw', 'adminlte.comision.list')->name('lw');
+Route::view('lw/{id}', 'adminlte.comision.show')->name('admin.lw.show');
 
 Auth::routes();
 

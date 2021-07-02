@@ -18,6 +18,11 @@ class Comision extends Model
         );
     }
 
+    public function gastos()
+    {
+        return $this->hasMany('App\Gasto');
+    }
+
     public function resolucion()
     {
         return $this->belongsTo('App\Resolucion');
@@ -53,6 +58,61 @@ class Comision extends Model
             ->first();
 
         return empty($agente) ? 0 : $agente->monto;
+    }
+
+    public function getDestinos(): ? string
+    {
+        return $this->getAttribute('destinos');
+    }
+
+    public function getExterno(): ?bool
+    {
+        return $this->getAttribute('externo');
+    }
+
+    public function getDias(): ?int
+    {
+        return $this->getAttribute('dias');
+    }
+
+    public function destinosLW()
+    {
+        $ids = self::getDestinos();
+        $externo = self::getExterno();
+
+        $destinos = '';
+        $pre_ids = str_replace(['[', ']', '"'], '', $ids);
+        $destinos_id = explode(',', $pre_ids);
+
+        if ($externo == 1) {
+            $lista = DB::table('provincias')
+                ->select(DB::raw('nombre'))
+                ->where('id', '=', $destinos_id)
+                ->get();
+        } else {
+            $lista = DB::table('localidades')
+                ->select(DB::raw('nombre'))
+                ->whereIn('id', $destinos_id)
+                ->get();
+        }
+
+        foreach ($lista as $l) {
+            $destinos = $destinos . ', ' . $l->nombre;
+        }
+
+        return substr($destinos, 2);
+    }
+
+    public function montoComisionLW($id)
+    {
+        $dias = self::getDias();
+        $externo = self::getExterno();
+
+        $agente = Agente::find($id);
+        $monto_comision = $dias * $agente->cargo->monto;
+        $monto_comision = $externo ? $monto_comision * 2 : $monto_comision;
+
+        return $monto_comision;
     }
 
     public static function destinos($ids, $externo)

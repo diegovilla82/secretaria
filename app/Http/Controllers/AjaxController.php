@@ -61,6 +61,7 @@ class AjaxController extends Controller
         //     ->groupBy('agentes.id')
         //     ->simplePaginate(1000);
 
+        
         $lista = DB::table('comisiones')
             ->join(
                 'resoluciones',
@@ -91,7 +92,15 @@ class AjaxController extends Controller
             ->groupBy('anio', 'agentes.id')
             ->simplePaginate(10000);
 
-        return $lista;
+            return $lista;
+
+            // $lista = Comision::select('comisiones.*')
+           $lista = Agente::simplePaginate(10000);
+
+
+
+        
+        return $lista[1]->montoComisiones();
     }
 
     public function resolucionesAjax(Request $request)
