@@ -2,48 +2,52 @@
     <table class="table table-striped table-bordered table-sm">
         <thead>
             <tr style="font-size: 14px;">
-                <th>Agente</th>
-                <th>Cargo</th>
-                <th>CUIT</th>
-                <th>Viaticos</th>
+                <th>Res. (Año)</th>
+                <th>Act/exp</th>
+                <th>Salida</th>
+                <th>Destinos</th>
                 <th>Dias</th>
+                <th>Agentes</th>
                 <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($agentes as $agente)
+            @forelse ($comisiones as $comision)
             <tr style="font-size: 14px;">
                 <td>
-                    {{ $agente->nombre }}
+                    {{ $comision->resolucion->numero . '(' . date('Y', strtotime($comision->resolucion->numero )). ')' }}
                 </td>
                 <td>
-                @if($agente->cargo)
-                    {{ $agente->cargo->nombre }}
-                @endif
+                    {{ $comision->act_exp }}
                 </td>
                 <td>
-                    {{ $agente->cuit }}
+                    {{ $comision->fecha_salida }}
                 </td>
                 <td>
-                    {{ $agente->montoComisiones() }}
+                    {{ $comision->destinosLW() }}
                 </td>
                 <td>
-                    {{ $agente->diasComisiones() }}
+                    {{ $comision->dias }}
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.lw.show', $agente->id) }}" role="button">Ver</a>
+                    @foreach( $comision->agentes as $agente )
+                      {{$agente->nombre}} <br>
+                    @endforeach 
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ route('reporte', $comision->id) }}" role="button">Generar</a>
                 </td>
             </tr>
             @empty
             <tr>
                 <td colspan="4">
                     <div class="callout callout-info">
-                    <p>Todavia no hay ganadores</p>
+                    <p>Todavia no hay comisiones</p>
                     </div>
                 </td>
             </tr>
             @endforelse
         </tbody>
     </table> 
-        {{ $agentes->links() }}
+        {{ $comisiones->links() }}
 </div>

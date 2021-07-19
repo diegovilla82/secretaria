@@ -8,6 +8,22 @@ use DB;
 class Comision extends Model
 {
     protected $table = 'comisiones';
+    protected $fillable = [
+        'id',
+        'act_exp',
+        'motivo',
+        'fecha_salida',
+        'externo',
+        'destinos',
+        'dias',
+        'marca_modelo',
+        'patente',
+        'combustible',
+        'resolucion_id',
+        'created_at',
+        'updated_at',
+    ];
+
 
     public function agentes()
     {

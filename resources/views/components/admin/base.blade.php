@@ -1,4 +1,4 @@
-@props(['title'])
+@props(['title' => ''])
 
 @extends('adminlte::page')
 

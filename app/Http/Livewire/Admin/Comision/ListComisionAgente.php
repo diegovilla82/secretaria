@@ -14,7 +14,7 @@ class ListComisionAgente extends Component
 
     public function render()
     {
-        $lista = Agente::orderBy('nombre')->paginate(10);
+        $lista = Agente::orderByDesc('created_at')->paginate(10);
         return view('livewire.admin.comision.list-comision-agente', [
             'agentes' => $lista
         ]);

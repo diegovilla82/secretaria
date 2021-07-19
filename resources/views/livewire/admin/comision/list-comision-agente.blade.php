@@ -1,4 +1,5 @@
 <div>
+  <x-admin.input title="Nombre" model="parametro" required=true tabindex=6 classes="col-md-6"/>
     <table class="table table-striped table-bordered table-sm">
         <thead>
             <tr style="font-size: 14px;">
@@ -25,13 +26,15 @@
                     {{ $agente->cuit }}
                 </td>
                 <td>
-                    {{ $agente->montoComisiones() }}
+                    @if($agente->montoComisiones())
+                        {{ '$' . $agente->montoComisiones() }}
+                    @endif
                 </td>
                 <td>
                     {{ $agente->diasComisiones() }}
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.lw.show', $agente->id) }}" role="button">Ver</a>
+                    <a class="btn-sm btn-primary" href="{{ route('comision_agente_lw.show', $agente->id) }}" role="button">Ver</a>
                 </td>
             </tr>
             @empty

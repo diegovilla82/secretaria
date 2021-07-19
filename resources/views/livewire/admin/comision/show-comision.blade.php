@@ -1,5 +1,5 @@
 <div>
-<table class="table table-sm">
+<table class="table table-striped table-bordered table-sm">
     <thead>
         <tr>
             <th>Res.</th>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Comision;
+use Illuminate\Http\Request;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +22,61 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/','/comisiones');
 
-Route::view('lw', 'adminlte.comision.list')->name('lw');
-Route::view('lw/{id}', 'adminlte.comision.show')->name('admin.lw.show');
+Route::get('reporte/{id}', function(Request $request){ 
+    // return $request->id;
+    $comision = Comision::find($request->id);
+    // return view('reports/tabla', compact('comision'));
+    // return $comision->agentes;
+
+    $data = [
+        'comision' => $comision,
+        'titulo' => 'Styde.net'
+    ];
+    return \PDF::loadView('reports/tabla', $data)
+        ->setPaper('legal')
+        ->download('archivo.pdf');
+})->name('reporte');
+
+Route::get('docs-generate', function(){
+
+    $headers = array(
+
+        "Content-type"=>"text/html",
+
+        "Content-Disposition"=>"attachment;Filename=myGeneratefile.docx"
+
+    );
+
+    
+
+    $content = '<html>
+
+            <head><meta charset="utf-8"></head>
+
+            <body>
+
+                <p>My Blog Laravel 7 generate word document from html Example - Nicesnippets.com</p>
+
+                <ul><li>Php</li><li>Laravel</li><li>Html</li></ul>
+
+            </body>
+
+            </html>';
+
+    
+
+    return \Response::make($content,200, $headers);
+
+});
+
+
+Route::view('conisiones_agente_lw', 'adminlte.comision.list')->name('conisiones_agente_lw.index');
+Route::view('comision_agente_lw/{id}', 'adminlte.comision.show')->name('comision_agente_lw.show');
+
+Route::view('comisiones_lw', 'adminlte.comision.list1')->name('comisiones_lw.index');
+Route::view('comisiones_lw/{id}', 'adminlte.comision.show')->name('comisiones_lw.show');
+Route::view('comisiones_lw_new', 'adminlte.comision.new')->name('comisiones_lw.new');
+Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comisiones_lw.edit');
 
 Auth::routes();
 
