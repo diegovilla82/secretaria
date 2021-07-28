@@ -5,6 +5,7 @@
                 <th>Agente</th>
                 <th>Concepto</th>
                 <th>Monto</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -17,22 +18,22 @@
                     {{ $gasto->concepto }}
                 </td>
                 <td>
-                    {{ $comision->dias }}
+                    {{ $gasto->importe }}
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('reporte', $comision->id) }}" role="button">Generar</a>
+                Boton
                 </td>
             </tr>
             @empty
             <tr>
                 <td colspan="4">
                     <div class="callout callout-info">
-                    <p>Todavia no hay comisiones</p>
+                    <p>Todavia no hay gastos</p>
                     </div>
                 </td>
             </tr>
             @endforelse
         </tbody>
     </table> 
-        {{ $comisiones->links() }}
+        {{ $gastos->links() }}
 </div>

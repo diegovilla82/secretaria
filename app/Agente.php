@@ -70,4 +70,9 @@ class Agente extends Model
     {
         return $this->belongsTo('App\Cargo');
     }
+
+    public function gastos()
+    {
+        return $this->hasMany('App\Gasto');
+    }
 }

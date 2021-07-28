@@ -19,4 +19,9 @@ class Gasto extends Model
     {
         return $this->belongsTo('App\Comision');
     }
+
+    public function agente()
+    {
+        return $this->belongsTo('App\Agente');
+    }
 }

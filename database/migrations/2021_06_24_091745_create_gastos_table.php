@@ -18,6 +18,7 @@ class CreateGastosTable extends Migration
             $table->string('concepto')->nullable();
             $table->float('importe')->nullable();
             $table->unsignedBigInteger('comision_id')->nullable();
+            $table->unsignedBigInteger('agente_id')->nullable();
             $table->timestamps();
         });
     }
