@@ -1,5 +1,6 @@
 <?php
 
+use App\Agente;
 use App\Comision;
 use Illuminate\Http\Request;
 use Illuminate\Http\Client\Response;
@@ -25,6 +26,8 @@ Route::redirect('/','/comisiones');
 Route::get('reporte/{id}', function(Request $request){ 
     // return $request->id;
     $comision = Comision::find($request->id);
+    $agente = Agente::find(2);
+    // dd($agente->gastosComision(577));
     // return view('reports/tabla', compact('comision'));
     // return $comision->agentes;
 

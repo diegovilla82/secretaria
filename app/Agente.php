@@ -75,4 +75,18 @@ class Agente extends Model
     {
         return $this->hasMany('App\Gasto');
     }
+
+    public function gastosComision($comision_id)
+    {
+        $agente_id = self::getId();
+
+        return DB::table('agentes')
+            ->join('gastos', 'agentes.id', '=', 'gastos.agente_id')
+            ->select(DB::raw('gastos.*'))
+            ->where('gastos.comision_id', '=', $comision_id)
+            ->where('gastos.agente_id', '=', $agente_id)
+            ->get();
+
+        // return $this->hasMany('App\Gasto');
+    }
 }
