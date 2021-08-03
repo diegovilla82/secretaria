@@ -21,19 +21,34 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// test
+Route::view('conisiones_agente_lw', 'adminlte.comision.list')->name('conisiones_agente_lw.index');
+Route::view('comision_agente_lw/{id}', 'adminlte.comision.show')->name('comision_agente_lw.show');
+Route::view('comisiones_lw/{id}', 'adminlte.comision.show')->name('comisiones_lw.show');
+// test
+
+Route::view('comisiones_lw', 'adminlte.comision.list1')->name('comisiones_lw.index');
+Route::view('comisiones_lw_new', 'adminlte.comision.new')->name('comisiones_lw.new');
+Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comisiones_lw.edit');
+
+
+
+
+
 Route::redirect('/','/comisiones');
+
+
 
 Route::get('reporte/{id}', function(Request $request){ 
     // return $request->id;
     $comision = Comision::find($request->id);
-    $agente = Agente::find(2);
     // dd($agente->gastosComision(577));
     // return view('reports/tabla', compact('comision'));
     // return $comision->agentes;
 
     $data = [
         'comision' => $comision,
-        'titulo' => 'Styde.net'
+        'titulo' => 'IPDUV'
     ];
     return \PDF::loadView('reports/tabla', $data)
         ->setPaper('legal')
@@ -73,13 +88,7 @@ Route::get('docs-generate', function(){
 });
 
 
-Route::view('conisiones_agente_lw', 'adminlte.comision.list')->name('conisiones_agente_lw.index');
-Route::view('comision_agente_lw/{id}', 'adminlte.comision.show')->name('comision_agente_lw.show');
 
-Route::view('comisiones_lw', 'adminlte.comision.list1')->name('comisiones_lw.index');
-Route::view('comisiones_lw/{id}', 'adminlte.comision.show')->name('comisiones_lw.show');
-Route::view('comisiones_lw_new', 'adminlte.comision.new')->name('comisiones_lw.new');
-Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comisiones_lw.edit');
 
 Auth::routes();
 
