@@ -32,6 +32,7 @@
         </div>
     </div>
     <br>
+    @if(!$isEdit)
 
     <div class="col-md-12">
         <div class="form-group">
@@ -44,9 +45,20 @@
                     @endforeach
                 </select>
             </div>
+
         </div>
     </div>
-    
+    @else
+        <x-admin.card title="Agentes" >
+            <x-front.modal key="AddAgente" classes="btn-primary btn-sm float-right" title="Agregar Agente">
+                <livewire:admin.agentes.add-agente-comision :comision='request()->id'>
+            </x-front>
+            <br>
+            <br>
+             <livewire:admin.agentes.agentes-comision :comision='request()->id'>
+        </x-admin.card>
+
+    @endif
 
     <div class="row">
         <div class="col-md-2">
@@ -105,7 +117,7 @@
 
     </div>
 
-    
+
     <div class="row">
         <x-admin.input type="date" :disabled="$disabled" title="Fecha Resolucion" model="resolucion.fecha" required=true
             tabindex=7 classes="col-md-2" />
@@ -115,7 +127,7 @@
     </div>
 
 
-    <div class="form-row align-items-center">
+    {{-- <div class="form-row align-items-center">
         <div class="col-md-3">
             <label> Comision Pasaje: </label>
         </div>
@@ -128,16 +140,8 @@
         <div class="col-md-1">
             <input type="checkbox" id="check_vehiculo" name="check_vehiculo" checked="checked" />
         </div>
-    </div>
-    <br>
-    <div class="form-row align-items-center">
-        <div class="col-md-2">
-            <label> Posee gastos extra? : </label>
-        </div>
-        <div class="col-md-1">
-            <input type="checkbox" id="check_gastos" name="check_gastos" value="1" />
-        </div>
-    </div>
+    </div> --}}
+
 
     @section('js')
 
