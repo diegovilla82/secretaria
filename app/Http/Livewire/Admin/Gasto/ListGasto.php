@@ -15,6 +15,7 @@ class ListGasto extends Component
         $this->comision = $comision;
 
     }
+    
     public function render()
     {
         $gastos = Gasto::where('comision_id', $this->comision->id)->paginate(10);

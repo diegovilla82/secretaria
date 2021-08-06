@@ -22,4 +22,9 @@ class Resolucion extends Model
     {
         return $this->hasMany('App\ResolucionDetalle');
     }
+
+    public function destinos()
+    {
+        return $this->hasMany('App\Destino');
+    }
 }
