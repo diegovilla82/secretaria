@@ -20,6 +20,7 @@ class CreateAgenteComisionTable extends Migration
             $table->float('monto')->nullable();
             $table->boolean('chofer')->default(false);
             $table->string('vehiculo_pasaje')->nullable();
+            $table->integer('gastos')->default(0);
             $table->timestamps();
         });
     }
