@@ -25,6 +25,9 @@ class NewGasto extends Component
         $this->gasto->comision_id = $this->comision->id;
         $this->gasto->concepto = $this->concepto_selected;
         $this->gasto->save();
+        $this->gasto = new Gasto();
+
+        $this->emit('newGastoModal', 'Gasto');
 
     }
     public function mount(Comision $comision)

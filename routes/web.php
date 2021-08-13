@@ -3,7 +3,9 @@
 use App\Agente;
 use App\Comision;
 use Illuminate\Http\Request;
+use App\Exports\ComisionExport;
 use Illuminate\Http\Client\Response;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,10 +36,14 @@ Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comision
 
 
 
+Route::redirect('/','/comisiones_lw');
 
-Route::redirect('/','/comisiones');
 
 
+Route::get('excel/{id}', function(Request $request){ 
+    return Excel::download(new ComisionExport($request->id), 'comision' . $request->id .'.xlsx');
+
+})->name('excel');
 
 Route::get('reporte/{id}', function(Request $request){ 
     // return $request->id;

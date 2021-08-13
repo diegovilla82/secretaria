@@ -8,7 +8,7 @@
                 <th>Destinos</th>
                 <th>Dias</th>
                 <th>Agentes</th>
-                <th>Detalle</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,16 @@
                     @endforeach 
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('reporte', $comision->id) }}" role="button">Generar</a>
+                    <a class="btn-sm btn-success" href="{{ route('excel', $comision->id) }}" role="button">
+                        <span class="fa fa-table" aria-hidden="true"></span>
+                     </a>
+                     &nbsp;
+                    <a class="btn-sm btn-warning" href="{{ route('reporte', $comision->id) }}" role="button">
+                        <span class="fa fa-print" aria-hidden="true"></span>
+                     </a>
+                     &nbsp;
+                    <a class="btn-sm btn-info" href="{{ route('comisiones_lw.edit', $comision->id) }}" role="button">
+                     <span class="fa fa-search" aria-hidden="true"></span></a>
                 </td>
             </tr>
             @empty

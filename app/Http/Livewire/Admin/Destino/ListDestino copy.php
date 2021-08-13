@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ListDestino extends Component
 {
-    public $resolucion, $externo, $comision;
+    public $resolucion, $externo;
 
     protected $listeners = ['newDestinonModal' => 'render'];
 
@@ -17,18 +17,22 @@ class ListDestino extends Component
     {
         $entidad = Destino::find($id);
         $entidad->delete();
+
+        // $this->emit('subtract_agente');
     }
     
     public function mount(Comision $comision)
     {
-        $this->comision = $comision;
+        $this->resolucion = $comision->resolucion;
     }
     
     public function render()
     {
-        $destinos = Destino::where('resolucion_id', $this->comision->resolucion->id)->get();
+        $com = Comision::find(577);
+//        dd($com->resolucion->destinos);
+        // dd($this->resolucion->destinos[0]->destino()[0]->nombre);
         return view('livewire.admin.destino.list-destino', [
-            'destinos' => $destinos
+            'destinos' => $com->resolucion->destinos
         ]);
     }
 }

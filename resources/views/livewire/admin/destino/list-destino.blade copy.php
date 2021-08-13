@@ -2,38 +2,29 @@
     <table class="table table-striped table-bordered table-sm">
         <thead>
             <tr style="font-size: 14px;">
-                <th>Agente</th>
-                <th>Concepto</th>
-                <th>Monto</th>
+                <th>Destino</th>
                 <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($gastos as $gasto)
+            @forelse ($destinos as $destino)
             <tr style="font-size: 14px;">
                 <td>
-                    {{ $gasto->agente->nombre }}
+                    {{ $destino->getDestinos()->nombre }}
                 </td>
                 <td>
-                    {{ $gasto->concepto }}
-                </td>
-                <td>
-                    {{ $gasto->importe }}
-                </td>
-                <td>
-                <x-admin.delete-btn key="{{ $gasto->id }}"  event='subtract_gasto' />
+                    <x-admin.delete-btn key="{{ $destino->id }}"  event='subtract_destino' />
                 </td>
             </tr>
             @empty
             <tr>
                 <td colspan="4">
                     <div class="callout callout-info">
-                    <p>Todavia no hay gastos</p>
+                    <p>No hay destinos cargados</p>
                     </div>
                 </td>
             </tr>
             @endforelse
         </tbody>
     </table> 
-        {{ $gastos->links() }}
 </div>

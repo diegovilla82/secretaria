@@ -10,6 +10,14 @@ class ListGasto extends Component
 {
     public $comision;
 
+    protected $listeners = ['newGastoModal' => 'render'];
+
+    public function subtract_gasto($id)
+    {
+        $entidad = Gasto::find($id);
+        $entidad->delete();
+    }
+
     public function mount(Comision $comision)
     {
         $this->comision = $comision;

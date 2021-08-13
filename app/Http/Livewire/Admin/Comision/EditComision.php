@@ -38,14 +38,18 @@ class EditComision extends Component
     public function mount(Comision $comision)
     {
         $this->comision = $comision;
+        $act_exp = explode("-", $comision->act_exp);
+        $this->exp1 = $act_exp[0];
+        $this->exp2 = $act_exp[1];
+        $this->exp3 = $act_exp[2];
+        $this->exp4 = $act_exp[3];
+        $this->exp5 = $act_exp[4];
         $this->agentesSelected = $this->comision->agentes
             ->pluck('nombre', 'id')
             ->toArray();
-        // dd($this->agentesSelected);
-        // dd($this->comision->agentes->pluck('nombre','id'));
-        $this->exp1 = 'E';
-        $this->exp5 = 'A';
+
     }
+    
     public function test()
     {
         $this->validate();
@@ -64,7 +68,7 @@ class EditComision extends Component
             $this->exp5;
 
         $this->comision->save();
-        dd($this->comision);
+//        dd($this->comision);
     }
 
     public function render()

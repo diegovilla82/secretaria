@@ -247,19 +247,19 @@ return [
         //     'label_color' => 'success',
         // ],
         ['header' => 'Administrar'],
-        [
-            'text' => 'Resoluciones',
-            'url' => 'resoluciones',
-            'icon' => 'fas fa-fw fa-list-alt',
-        ],
+        // [
+        //     'text' => 'Resoluciones',
+        //     'url' => 'resoluciones',
+        //     'icon' => 'fas fa-fw fa-list-alt',
+        // ],
         [
             'text' => 'Comisiones',
-            'url' => 'comisiones',
+            'url' => 'comisiones_lw',
             'icon' => 'fas fa-fw fa-shuttle-van',
         ],
         [
             'text' => 'Cargar Comisión',
-            'url' => 'comisiones/create',
+            'url' => 'comisiones_lw_new',
             'icon' => 'fas fa-fw fa-plus',
         ],
 

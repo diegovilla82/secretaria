@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class NewComision extends Component
 {
-    public $comision, $resolucion, $disabled, $agentesSelected, $choferSelected, $provinciaSelected, $localidadesSelected;
+    public $comision, $resolucion, $disabled, $agentesSelected, $choferSelected, $provinciaSelected, $localidadesSelected, $isEdit = 0;
     public $exp1, $exp2, $exp3, $exp4, $exp5, $externo, $targets;
     
 
@@ -97,7 +97,7 @@ class NewComision extends Component
                 ]);
             }
         }
-        
+        return redirect()->route('comisiones_lw.edit', $this->comision->id);
       dd($this->comision);
     }
     public function render()
