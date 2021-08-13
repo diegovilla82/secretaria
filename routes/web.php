@@ -29,6 +29,7 @@ Route::view('comision_agente_lw/{id}', 'adminlte.comision.show')->name('comision
 Route::view('comisiones_lw/{id}', 'adminlte.comision.show')->name('comisiones_lw.show');
 // test
 
+Route::view('agente_lw_new', 'adminlte.agente.create')->name('agente.new');
 Route::view('comisiones_lw', 'adminlte.comision.list1')->name('comisiones_lw.index');
 Route::view('comisiones_lw_new', 'adminlte.comision.new')->name('comisiones_lw.new');
 Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comisiones_lw.edit');

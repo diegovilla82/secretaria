@@ -253,6 +253,11 @@ return [
         //     'icon' => 'fas fa-fw fa-list-alt',
         // ],
         [
+            'text' => 'Agregar Agente',
+            'url' => 'agente_lw_new',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'Comisiones',
             'url' => 'comisiones_lw',
             'icon' => 'fas fa-fw fa-shuttle-van',
