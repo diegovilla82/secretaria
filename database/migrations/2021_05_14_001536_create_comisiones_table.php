@@ -21,6 +21,7 @@ class CreateComisionesTable extends Migration
                 ->nullable()
                 ->default(false);
             $table->string('destinos')->nullable();
+            $table->string('motivo')->nullable();
             $table->integer('dias')->nullable();
             $table->float('combustible')->default(0);
             $table->string('act_exp')->nullable();
