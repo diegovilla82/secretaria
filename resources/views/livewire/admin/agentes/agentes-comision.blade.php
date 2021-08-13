@@ -2,23 +2,31 @@
      <table class="table table-striped table-bordered table-sm">
         <thead>
             <tr style="font-size: 14px;">
+                 <th></th>
                 <th>Nombre y Apellido</th>
                 <th>Cuil</th>
                 <th>Cargo</th>
-                <th>Situación</th>
+                <th>Monto</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @forelse ($agentes as $agente)
             <tr style="font-size: 14px;">
                 <td>
-                    {{ $agente->nombre }}
+                    @if($agente->pivot->chofer)  <i class="fas fa-fw fa-shuttle-van"></i>@else  <i class="fas fa-fw fa-user"></i> @endif
+                </td>
+                <td>
+                    {{ $agente->nombre}}
                 </td>
                 <td>
                     {{ $agente->cuit }}
                 </td>
                 <td>
                     {{ $agente->cargo->nombre }}
+                </td>
+                 <td>
+                    {{'$ '. $agente->pivot->monto }}
                 </td>
                 <td>
                     <x-admin.delete-btn key="{{ $agente->id }}"  event='subtract_agente' />
