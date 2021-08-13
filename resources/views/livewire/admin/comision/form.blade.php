@@ -35,7 +35,10 @@
         <x-admin.card title="Agentes/Gastos" >
         <div class="row">
             <div class="col-md-6">
-            <x-front.modal key="AddAgente" classes="btn-primary btn-sm float-right" title="Agregar Agente">
+            <x-front.modal key="newAgente" classes="btn-primary btn-sm float-right" title="Cargar Agente">
+                <livewire:admin.agentes.new-agente :comision='request()->id'>
+            </x-front>
+            <x-front.modal key="AddAgente" classes="btn-primary btn-sm float-right" title="Agregar Agente a comision">
                 <livewire:admin.agentes.add-agente-comision :comision='request()->id'>
             </x-front>
             <br>

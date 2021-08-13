@@ -30,7 +30,8 @@ class Comision extends Model
         //        return $this->belongsToMany('App\Agente', 'agente_comision', '', 'agente_id');
         return $this->belongsToMany('App\Agente', 'agente_comision')->withPivot(
             'gastos',
-            'id'
+             'monto'
+            , 'id'
         );
     }
 
