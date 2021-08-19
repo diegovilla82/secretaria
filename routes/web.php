@@ -23,16 +23,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// test
-Route::view('conisiones_agente_lw', 'adminlte.comision.list')->name('conisiones_agente_lw.index');
-Route::view('comision_agente_lw/{id}', 'adminlte.comision.show')->name('comision_agente_lw.show');
-Route::view('comisiones_lw/{id}', 'adminlte.comision.show')->name('comisiones_lw.show');
-// test
 
-Route::view('agente_lw_new', 'adminlte.agente.create')->name('agente.new');
-Route::view('comisiones_lw', 'adminlte.comision.list1')->name('comisiones_lw.index');
-Route::view('comisiones_lw_new', 'adminlte.comision.new')->name('comisiones_lw.new');
-Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comisiones_lw.edit');
 
 
 
@@ -100,6 +91,19 @@ Route::get('docs-generate', function(){
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+
+    // test
+Route::view('conisiones_agente_lw', 'adminlte.comision.list')->name('conisiones_agente_lw.index');
+Route::view('comision_agente_lw/{id}', 'adminlte.comision.show')->name('comision_agente_lw.show');
+Route::view('comisiones_lw/{id}', 'adminlte.comision.show')->name('comisiones_lw.show');
+// test
+
+Route::view('agente_lw_new', 'adminlte.agente.create')->name('agente.new');
+Route::view('comisiones_lw', 'adminlte.comision.list1')->name('comisiones_lw.index');
+Route::view('comisiones_lw_new', 'adminlte.comision.new')->name('comisiones_lw.new');
+Route::view('comisiones_lw/edit/{id}', 'adminlte.comision.edit')->name('comisiones_lw.edit');
+
+
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/comisiones', 'ComisionController@index');

@@ -18,75 +18,38 @@ class UserSeeder extends Seeder
         $role_admin = Role::where('name', 'admin')->first();
 
         $user = new User();
-        $user->name = 'sistemas';
-        $user->email = 'ipduv.sistemas@gmail.com';
-        $user->password = bcrypt('informatica');
-        if (User::where('name', $user->name)->count() == 0) {
-            $user->save();
-            $user->assignRole($role_super_admin);
-        }
-
-        $user = new User();
         $user->name = 'admin';
         $user->email = 'admin@admin.com';
         $user->password = bcrypt('admin');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_admin);
-        }
-
-        $user = new User();
-        $user->name = 'plisboa';
-        $user->email = 'plisboa@gmail.com';
-        $user->password = bcrypt('pablo123');
-        if (User::where('name', $user->name)->count() == 0) {
-            $user->save();
-            $user->assignRole($role_admin);
-        }
-
-        $user = new User();
-        $user->name = 'admin';
-        $user->email = 'admin@admin.com';
-        $user->password = bcrypt('admin');
-        if (User::where('name', $user->name)->count() == 0) {
-            $user->save();
-            $user->assignRole($role_admin);
-        }
-
-        $user = new User();
-        $user->name = 'hacevedo';
-        $user->email = 'hacevedo.ipduv@gmail.com';
-        $user->password = bcrypt('21849590');
-        if (User::where('name', $user->name)->count() == 0) {
-            $user->save();
-            $user->assignRole($role_normal);
         }
 
         $user = new User();
         $user->name = 'ldisilvestre';
-        $user->email = 'disilvestre.ipduv@gmail.com';
+        $user->email = 'disilvestre.ipduv@ipduv.com';
         $user->password = bcrypt('luicho123');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_normal);
         }
 
-        // Lourdes Parra
+        // Matias Fernandez (123456)
         $user = new User();
-        $user->name = 'lparra';
-        $user->email = 'lparra@gmail.com';
+        $user->name = 'mfernandez';
+        $user->email = 'mfernandez@ipduv.com';
         $user->password = bcrypt('123456');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_admin);
         }
-
-        // NUEVOS USUARIOS
-        // Matias Fernandez (123456)
+        
+        // Daniel Ramirez (ipduv4)
         $user = new User();
-        $user->name = 'mfernandez';
-        $user->email = 'mfernandez@gmail.com';
-        $user->password = bcrypt('123456');
+        $user->name = 'dramirez';
+        $user->email = 'dramirez@ipduv.com';
+        $user->password = bcrypt('ipduv1');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_admin);
@@ -95,8 +58,58 @@ class UserSeeder extends Seeder
         // Daniel Sotelo (Secretaria11)
         $user = new User();
         $user->name = 'dsotelo';
-        $user->email = 'dsotelo@gmail.com';
+        $user->email = 'dsotelo@ipduv.com';
         $user->password = bcrypt('Secretaria11');
+        if (User::where('name', $user->name)->count() == 0) {
+            $user->save();
+            $user->assignRole($role_admin);
+        }
+
+        // Isabel Mainetti
+        $user = new User();
+        $user->name = 'imainetti';
+        $user->email = 'imainetti@ipduv.com';
+        $user->password = bcrypt('Secretaria123');
+        if (User::where('name', $user->name)->count() == 0) {
+            $user->save();
+            $user->assignRole($role_admin);
+        }
+
+        // Jose Luis Robledo
+        $user = new User();
+        $user->name = 'jrobledo';
+        $user->email = 'jrobledo@ipduv.com';
+        $user->password = bcrypt('Secretaria23');
+        if (User::where('name', $user->name)->count() == 0) {
+            $user->save();
+            $user->assignRole($role_admin);
+        }
+
+        // Luis Ortiz
+        $user = new User();
+        $user->name = 'lortiz';
+        $user->email = 'lortiz@ipduv.com';
+        $user->password = bcrypt('Secretaria3');
+        if (User::where('name', $user->name)->count() == 0) {
+            $user->save();
+            $user->assignRole($role_admin);
+        }
+
+        // Martin Chiarelli
+        $user = new User();
+        $user->name = 'mchiarelli';
+        $user->email = 'mchiarelli@ipduv.com';
+        $user->password = bcrypt('Secretaria1');
+        if (User::where('name', $user->name)->count() == 0) {
+            $user->save();
+            $user->assignRole($role_admin);
+        }
+
+        // Pablo Lisboa
+        $user = new User();
+        $user->name = 'plisboa';
+        $user->email = 'plisboa@ipduv.com';
+        $user->password = bcrypt('pablo123');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_admin);
@@ -105,12 +118,21 @@ class UserSeeder extends Seeder
         // Santiago Duarte (ipduv4)
         $user = new User();
         $user->name = 'sduarte';
-        $user->email = 'sduarte@gmail.com';
+        $user->email = 'sduarte@ipduv.com';
         $user->password = bcrypt('ipduv4');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_admin);
         }
-        // FIN NUEVOS USUARIOS
+
+        // Wuerich Erica
+        $user = new User();
+        $user->name = 'ewuerich';
+        $user->email = 'ewuerich@ipduv.com';
+        $user->password = bcrypt('ipduv4');
+        if (User::where('name', $user->name)->count() == 0) {
+            $user->save();
+            $user->assignRole($role_admin);
+        }
     }
 }

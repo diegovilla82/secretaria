@@ -30,10 +30,7 @@ class NewDestino extends Component
 
     public function save()
     {
-
-
-        // $this->emit('postAdded');
-
+        $valor = $this->externo == null ? 0 : $this->externo;
 
         $this->destino->externo = $this->externo;
         $this->destino->destino_id = $this->destinoSelected;

@@ -6,6 +6,7 @@ use App\Agente;
 use App\Comision;
 use App\Localidad;
 use App\Provincia;
+use Carbon\Carbon;
 use App\Resolucion;
 use App\TipoResolucion;
 use Livewire\Component;
@@ -13,23 +14,17 @@ use Illuminate\Support\Facades\Auth;
 
 class NewComision extends Component
 {
-    public $comision, $resolucion, $disabled, $agentesSelected, $choferSelected, $provinciaSelected, $localidadesSelected, $isEdit = 0;
-    public $exp1, $exp2, $exp3, $exp4, $exp5, $externo, $targets;
+    public $comision, $resolucion, $disabled, $isEdit = 0, $error = '';
+    public $exp1, $exp2, $exp3, $exp4, $exp5, $targets;
     
 
     protected $rules = [
         'comision.externo'         => '',
-        'comision.motivo'          => '',
-        'agentesSelected'          => '',
-        'localidadesSelected'      => '',
-        'provinciaSelected'        => '',
-        'choferSelected'           => '',
+        'comision.motivo'          => 'required',
         'comision.marca_modelo'    => '',
         'comision.patente'         => '',
-        'comision.combustible'     => '',
-        'comision.dias'            => '',
+        'comision.dias'            => 'required',
         'comision.fecha_salida'    => '',
-        'externo'                  => '',
 
         'resolucion.numero'        => '',
         'resolucion.fecha'         => '',
@@ -42,63 +37,36 @@ class NewComision extends Component
             '_self' => 'En la misma ventana',
             '_blank' => 'En una ventana nueva',
         ];
+
         $this->comision = new Comision();
         $this->resolucion = new Resolucion();
         $this->exp1 = 'E';
         $this->exp5 = 'A';
+
+        $fecha = Carbon::now();
+        $this->comision->fecha_salida = $fecha->toDateString();
+        $this->resolucion->fecha = $fecha->toDateString();
+        $this->resolucion->user_id = Auth()->user()->id;
+        
+        
+        $ultimaResolucion = Resolucion::latest('id')->first();
+
+        $this->resolucion->numero = $ultimaResolucion->numero + 1;
+        $this->resolucion->fecha = $ultimaResolucion->fecha;
     }
+
     public function test() {
         $this->validate();
-
         $this->resolucion->tipo_resolucion_id = 13;
         $this->resolucion->user_id = Auth::user()->id;
         $this->resolucion->save();
 
         $this->comision->resolucion_id = $this->resolucion->id;
 
-        $this->comision->destinos = $this->comision->externo
-                ? json_encode($this->localidadesSelected)
-                : json_encode($this->localidadesSelected);
         $this->comision->act_exp = $this->exp1 . '-' . $this->exp2 . '-' . $this->exp3 . '-' . $this->exp4 . '-' . $this->exp5;
         $this->comision->save();
 
-        // VIAJE AUTO CHOFER
-        if ($this->choferSelected) {
-            $this->comision->agentes()->attach($this->choferSelected, [
-                'chofer' => '1',
-                'monto' => $this->comision->montoComision(
-                    $this->choferSelected,
-                    $this->comision->dias,
-                    $this->comision->externo
-                ),
-                'vehiculo_pasaje' => 'Moto',
-            ]);
-        }
-
-        if ($this->agentesSelected) {
-            // SI ES EXTERNO Y VIAJA UN VOCAL/PRESIDENTE SACO EL MONTO DE SU VIATICO PARA TODOS SINO SE RESPETA EL MONTO DEPENDIENDO DEL CARGO Y VIAJE
-            $comision_especial = $this->comision->montoComisionPresidenteVocal(
-                $this->agentesSelected
-            );
-
-
-            foreach ($this->agentesSelected as $p) {
-                $monto =
-                    $this->comision->externo && $comision_especial > 0
-                        ? $comision_especial * $this->comision->dias * 2
-                        : $this->comision->montoComision(
-                            $p,
-                            $this->comision->dias,
-                            $this->comision->externo
-                        );
-                $this->comision->agentes()->attach($p, [
-                    'monto' => $monto,
-                    'vehiculo_pasaje' => 'Moto1',
-                ]);
-            }
-        }
         return redirect()->route('comisiones_lw.edit', $this->comision->id);
-      dd($this->comision);
     }
     public function render()
     {

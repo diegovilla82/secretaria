@@ -35,10 +35,7 @@
         <x-admin.card title="Agentes/Gastos" >
         <div class="row">
             <div class="col-md-6">
-            <x-front.modal key="newAgente" classes="btn-primary btn-sm float-right" title="Cargar Agente">
-                <livewire:admin.agentes.new-agente :comision='request()->id'>
-            </x-front>
-            <x-front.modal key="AddAgente" classes="btn-primary btn-sm float-right" title="Agregar Agente a comision">
+            <x-front.modal key="AddAgente" classes="btn-primary btn-sm float-right" title="Cargar agente a la comision">
                 <livewire:admin.agentes.add-agente-comision :comision='request()->id'>
             </x-front>
             <br>
@@ -106,6 +103,13 @@
         <x-admin.input type="number" :disabled="$disabled" title="Num. Res." model="resolucion.numero" required=true
             tabindex=7 classes="col-md-2" />
     </div>
+    @if($error != '')
+    <div class="row">
+        <div class="alert alert-danger" role="alert">
+            {!! $error !!}
+        </div>
+    </div>
+    @endif
 @section('js')
 <script>
     Livewire.on('newDestinonModal', result => {
@@ -117,5 +121,13 @@
         $('#modal' + result).modal('toggle');
         $(".modal-backdrop").remove();
     })
+
+    Livewire.on('newDocumentationModal', result => {
+            $('#modal' + result).modal('toggle');
+            $(".modal-backdrop").remove();
+        })
+        window.addEventListener('closeModal', event => {
+            $('#modalAddAgente').modal('hide');
+        })
 </script>
-@stop
+@endsection

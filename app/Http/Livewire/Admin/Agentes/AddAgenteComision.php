@@ -12,24 +12,33 @@ class AddAgenteComision extends Component
     public $comision,
         $iteration,
         $agente_id,
-        $isDriver = 0;
+        $isDriver = 0,
+        $monto = 0;
+
+        protected $rules = [
+            'monto' => ''
+        ];
+
+    public function change()
+    {
+        try {
+            $agente = Agente::find($this->agente_id);
+            $this->monto = $agente->cargo->monto * $this->comision->dias;
+            $this->monto = $this->monto *  (($this->comision->externo) ? 2 : 1 );
+        } catch (\Throwable $th) {
+            $this->monto = 0;
+        }
+
+    }
 
     public function save_add_agente()
     {
-
-        $agente = Agente::find($this->agente_id);
-
-        $comision_especial = $this->comision->montoComisionPresidenteVocal([$this->agente_id]);
-
-        $monto = $this->comision->externo && $comision_especial > 0 ?
-                                 $comision_especial * $this->comision->dias * 2:
-                                 $this->comision->montoComision($this->agente_id, $this->comision->dias, $this->comision->externo);
-
         $this->comision->agentes()->attach($this->agente_id, [
-            'monto' => $monto,
+            'monto' => $this->monto,
             'chofer' => $this->isDriver,
             'vehiculo_pasaje' => 'Auto',
         ]);
+        $this->monto = 0;
         $this->emit('save_add_agente');
         $this->dispatchBrowserEvent('closeModal');
     }

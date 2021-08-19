@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Resolucion extends Model
 {
     protected $table = 'resoluciones';
+    protected $fillable = [
+        'id',
+        'fecha',
+        'numero',
+        'tipo_resolucion_id',
+        'user_id',
+        'created_at',
+        'updated_at',
+    ];
 
     public function comisiones()
     {

@@ -3,41 +3,45 @@
 namespace App\Http\Livewire\Admin\Comision;
 
 use App\Agente;
+use App\Destino;
 use App\Comision;
 use App\Localidad;
 use App\Provincia;
+use App\Resolucion;
 use App\TipoResolucion;
 use Livewire\Component;
+use App\Http\Traits\toast;
 
 class EditComision extends Component
 {
+    use toast;
     public $comision,
-        $disabled,
-        $agentesSelected,
-        $choferSelected,
-        $provinciaSelected,
-        $localidadesSelected,
-        $isEdit = 1;
-    public $exp1, $exp2, $exp3, $exp4, $exp5, $externo;
+            $resolucion,
+            $disabled,
+            $isEdit = 1;
+    public $exp1, $exp2, $exp3, $exp4, $exp5, $error = '';
 
     protected $rules = [
         'comision.externo' => '',
         'comision.motivo' => '',
-        'agentesSelected' => '',
-        'localidadesSelected' => '',
-        'provinciaSelected' => '',
-        'choferSelected' => '',
         'comision.marca_modelo' => '',
         'comision.patente' => '',
         'comision.combustible' => '',
-        'comision.dias' => '',
-        'comision.fecha_salida' => '',
-        'externo' => '',
+        'comision.motivo' => 'required',
+        'comision.dias' => 'required',
+        'comision.fecha_salida' => 'required',
+
+        'resolucion.numero'        => '',
+        'resolucion.fecha'         => 'required',
+        'resolucion.tipo_resolucion_id'       => '',
     ];
 
     public function mount(Comision $comision)
     {
+        $this->toast('Pagina Actualizada');
         $this->comision = $comision;
+        $this->resolucion = $comision->resolucion;
+
         $act_exp = explode("-", $comision->act_exp);
         $this->exp1 = $act_exp[0];
         $this->exp2 = $act_exp[1];
@@ -47,15 +51,22 @@ class EditComision extends Component
         $this->agentesSelected = $this->comision->agentes
             ->pluck('nombre', 'id')
             ->toArray();
-
     }
     
     public function test()
     {
+        $this->error = '';
+
+        if(count($this->comision->agentes) == 0 ) {
+            $this->error = '<br> <b> Debe agregar al menos un agente </b> <br>';
+        }
+        if(Destino::where('resolucion_id', $this->comision->resolucion->id)->count() == 0 ) {
+            $this->error = '<br> <b> Debe agregar al menos un destino </b> <br>';
+        }
+
+
         $this->validate();
-        $this->comision->destinos = $this->comision->externo
-            ? json_encode($this->localidadesSelected)
-            : json_encode($this->localidadesSelected);
+
         $this->comision->act_exp =
             $this->exp1 .
             '-' .

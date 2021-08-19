@@ -8,6 +8,8 @@
     'disabled'    => false,
     'noComplete'  => false,
     'placeholder' => null,
+    'name'        => 0,
+    'id'          => 0,
     'tabindex'    => 1
 ])
 
@@ -19,6 +21,9 @@
             class="form-control" 
             wire:model.lazy='{{ $model }}'
             placeholder="{{ $placeholder }}"
+            @if ($name) name = '{{ $name }}' @endif
+            @if ($id) id = '{{ $id }}' @endif
+
             @if ($required) required @endif
             @if ($disabled) disabled @endif
             @if ($noComplete) autocomplete="off" @endif

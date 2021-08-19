@@ -63,7 +63,7 @@ class Agente extends Model
         return $this->belongsToMany(
             'App\Comision',
             'agente_comision'
-        )->withPivot('gastos', 'monto');
+        )->withPivot('gastos', 'monto', 'chofer');
     }
 
     public function cargo()
