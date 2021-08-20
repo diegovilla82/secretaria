@@ -28,12 +28,13 @@ class UserSeeder extends Seeder
 
         $user = new User();
         $user->name = 'ldisilvestre';
-        $user->email = 'disilvestre.ipduv@ipduv.com';
+        $user->email = 'disilvestre@ipduv.com';
         $user->password = bcrypt('luicho123');
         if (User::where('name', $user->name)->count() == 0) {
             $user->save();
             $user->assignRole($role_normal);
         }
+
 
         // Matias Fernandez (123456)
         $user = new User();
@@ -55,6 +56,7 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+
         // Daniel Sotelo (Secretaria11)
         $user = new User();
         $user->name = 'dsotelo';
@@ -65,6 +67,8 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+
+        
         // Isabel Mainetti
         $user = new User();
         $user->name = 'imainetti';
@@ -75,6 +79,7 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+        
         // Jose Luis Robledo
         $user = new User();
         $user->name = 'jrobledo';
@@ -85,6 +90,7 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+        
         // Luis Ortiz
         $user = new User();
         $user->name = 'lortiz';
@@ -95,6 +101,7 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+        
         // Martin Chiarelli
         $user = new User();
         $user->name = 'mchiarelli';
@@ -105,6 +112,7 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+        
         // Pablo Lisboa
         $user = new User();
         $user->name = 'plisboa';
@@ -114,6 +122,8 @@ class UserSeeder extends Seeder
             $user->save();
             $user->assignRole($role_admin);
         }
+
+        
 
         // Santiago Duarte (ipduv4)
         $user = new User();
@@ -125,6 +135,7 @@ class UserSeeder extends Seeder
             $user->assignRole($role_admin);
         }
 
+        
         // Wuerich Erica
         $user = new User();
         $user->name = 'ewuerich';

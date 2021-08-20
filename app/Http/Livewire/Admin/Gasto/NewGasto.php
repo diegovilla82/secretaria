@@ -39,6 +39,7 @@ class NewGasto extends Component
         $this->conceptos = [
         'Anticipo para gastos' => 'Anticipo para gastos'
         ,'Pasaje Aereo' => 'Pasaje Aereo'
+        ,'Combustible' => 'Combustible'
         ,'Pasaje colectivo' => 'Pasaje colectivo'
         ,'Vehiculo empresa' => 'Vehiculo empresa'
         ,'Vehiculo oficial' => 'Vehiculo oficial'

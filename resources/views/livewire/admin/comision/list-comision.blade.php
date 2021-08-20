@@ -5,7 +5,7 @@
                 <th>Res. (Año)</th>
                 <th>Act/exp</th>
                 <th>Salida</th>
-                <th>Destinos</th>
+                {{-- <th>Destinos</th> --}}
                 <th>Dias</th>
                 <th>Agentes</th>
                 <th>Acciones</th>
@@ -23,7 +23,7 @@
                 <td>
                     {{ $comision->fecha_salida }}
                 </td>
-                <td>
+                {{-- <td>
                 @if($comision->destinosOld())
                     {{ $comision->destinosOld() }}
                 @elseif (count($comision->destinosNew))
@@ -33,7 +33,7 @@
                 @endforeach
 
                 @endif
-                </td>
+                </td> --}}
                 <td>
                     {{ $comision->dias }}
                 </td>
