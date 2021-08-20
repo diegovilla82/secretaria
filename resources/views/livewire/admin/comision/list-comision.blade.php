@@ -24,7 +24,15 @@
                     {{ $comision->fecha_salida }}
                 </td>
                 <td>
-                    {{ $comision->destinosLW() }}
+                @if($comision->destinosOld())
+                    {{ $comision->destinosOld() }}
+                @elseif (count($comision->destinosNew))
+
+                @foreach ( $comision->destinosNew as $destino )
+                    {{$destino}}
+                @endforeach
+
+                @endif
                 </td>
                 <td>
                     {{ $comision->dias }}

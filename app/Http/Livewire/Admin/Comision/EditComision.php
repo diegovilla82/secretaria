@@ -53,7 +53,7 @@ class EditComision extends Component
             ->toArray();
     }
     
-    public function test()
+    public function updateComision()
     {
         $this->error = '';
 
@@ -79,6 +79,11 @@ class EditComision extends Component
             $this->exp5;
 
         $this->comision->save();
+        // return redirect()->route('comisiones_lw.edit', $this->comision->id);
+        
+        session()->flash('success', 'La comision se modifico exitosamente!');
+        return redirect()->route('comisiones_lw.edit', $this->comision->id);
+       
 //        dd($this->comision);
     }
 

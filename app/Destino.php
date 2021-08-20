@@ -50,7 +50,7 @@ class Destino extends Model
                 ->first();
         } else {
             return Localidad::where('id', $destinos_id)
-                ->first();
+                ->get();
         }
         return $destinos;
         

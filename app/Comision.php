@@ -93,7 +93,12 @@ class Comision extends Model
         return $this->getAttribute('dias');
     }
 
-    public function destinosLW()
+    public function destinosNew()
+    {
+        return $this->hasMany('App\Destino', 'resolucion_id');
+    }
+
+    public function destinosOld()
     {
         $ids = self::getDestinos();
         $externo = self::getExterno();
@@ -113,12 +118,15 @@ class Comision extends Model
                 ->whereIn('id', $destinos_id)
                 ->get();
         }
+        if(count($lista)) {
+            foreach ($lista as $l) {
+                $destinos = $destinos . ', ' . $l->nombre;
+            }
 
-        foreach ($lista as $l) {
-            $destinos = $destinos . ', ' . $l->nombre;
+            return substr($destinos, 2);
+        } else { 
+            return 0;
         }
-
-        return substr($destinos, 2);
     }
 
     public function montoComisionLW($id)
