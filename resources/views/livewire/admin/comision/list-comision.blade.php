@@ -2,10 +2,11 @@
     <table class="table table-striped table-bordered table-sm">
         <thead>
             <tr style="font-size: 14px;">
-                <th>Res. (Año)</th>
+                <th>Res</th>
+                <th>Año</th>
                 <th>Act/exp</th>
                 <th>Salida</th>
-                {{-- <th>Destinos</th> --}}
+                <th>Destinos</th>
                 <th>Dias</th>
                 <th>Agentes</th>
                 <th>Acciones</th>
@@ -14,26 +15,34 @@
         <tbody>
             @forelse ($comisiones as $comision)
             <tr style="font-size: 14px;">
+                @isset($comision->resolucion->numero)
                 <td>
-                    {{ $comision->resolucion->numero . '(' . date('Y', strtotime($comision->resolucion->numero )). ')' }}
+                    {{ $comision->resolucion->numero }}                                        
                 </td>
+                <td>
+                    {{ date('Y', strtotime($comision->resolucion->numero )) }}
+                </td>
+                @else
+                <td></td>
+                <td></td>                
+                @endisset
                 <td>
                     {{ $comision->act_exp }}
                 </td>
                 <td>
                     {{ $comision->fecha_salida }}
                 </td>
-                {{-- <td>
+                <td>
                 @if($comision->destinosOld())
                     {{ $comision->destinosOld() }}
                 @elseif (count($comision->destinosNew))
 
                 @foreach ( $comision->destinosNew as $destino )
-                    {{$destino}}
+                    {{$destino->getDestinos()->nombre}}
                 @endforeach
 
                 @endif
-                </td> --}}
+                </td>
                 <td>
                     {{ $comision->dias }}
                 </td>

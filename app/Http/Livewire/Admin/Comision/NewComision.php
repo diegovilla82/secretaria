@@ -50,9 +50,13 @@ class NewComision extends Component
         
         
         $ultimaResolucion = Resolucion::latest('id')->first();
-
-        $this->resolucion->numero = $ultimaResolucion->numero + 1;
-        $this->resolucion->fecha = $ultimaResolucion->fecha;
+        if( isset($ultimaResolucion->numero)) {
+            $this->resolucion->numero = $ultimaResolucion->numero + 1;
+            $this->resolucion->fecha = $ultimaResolucion->fecha;
+        } else {
+            $this->resolucion->numero = 1;
+        }
+        
     }
 
     public function test() {
