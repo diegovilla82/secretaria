@@ -31,8 +31,8 @@ class NewDestino extends Component
     public function save()
     {
         $valor = $this->externo == null ? 0 : $this->externo;
-
-        $this->destino->externo = $this->externo;
+        
+        $this->destino->externo = $valor;
         $this->destino->destino_id = $this->destinoSelected;
         $this->destino->resolucion_id = $this->resolucion->id;
         $this->destino->save();
