@@ -24,7 +24,8 @@
             class="form-control" 
             wire:model.lazy='agente_id'
             tabindex=2
-        >        
+        >
+        <option value="" >Seleccionar agente</option>
         @foreach ($agentes->agentes as $agente)
             <option value="{{ $agente->id }}" @if($agente_id == $agente->id) selected="selected" @endif >{{ $agente->nombre }}</option>
         @endforeach
